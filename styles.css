@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5E6DA;
+    color: #5A3825;
+}
+
+.navbar {
+    background-color: #D2B48C;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand, .nav-link {
+    color: #5A3825 !important;
+    font-weight: bold;
+}
+
+.hero {
+    position: relative;
+    text-align: center;
+    color: #F5E6DA;
+    background-color: #7B4B26;
+    padding: 50px 0;
+    margin-bottom: 0;
+}
+.hero img {
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+    max-height: 400px;
+}
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.hero p {
+    font-size: 1.2rem;
+}
+
+section {
+    padding: 50px 0;
+}
+#about {
+    background-color: #F5E6DA;
+}
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #5A3825;
+}
+
+.card {
+    background-color: #D2B48C;
+    color: #5A3825;
+    border: none;
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    text-align: center;
+}
+
+footer {
+    background-color: #5A3825;
+    color: #F5E6DA;
+    padding: 20px 0;
+}
+
+
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
