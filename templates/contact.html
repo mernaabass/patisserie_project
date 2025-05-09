@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Contact Us | Sweet Shop{% endblock %}
+
+{% block content %}
+<section class="py-5 text-center">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Contact Us</h2>
+        <p class="mb-4">Email: contact@patisserie.com | Phone: +201113049943</p>
+        
+        <form class="mainForm_form" id="mainForm_form" action="{{ url_for('submit_order') }}" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <div class="error errorMessage" style="display: none;">Please enter your name</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+                <div class="error errorMessage" style="display: none;">Please enter a valid email</div>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+                <div class="error errorMessage" style="display: none;">Please enter a valid phone number</div>
+            </div>
+            <div class="mb-3">
+                <label for="order" class="form-label">Order Selection</label>
+                <select class="form-select" id="order_name" name="order_name">
+                    <option value="">Choose your order</option>
+                    <option value="cake">Chocolate Cake</option>
+                    <option value="croissant">Croissant</option>
+                    <option value="macaron">Macaron</option>
+                </select>
+                <div class="error errorMessage" style="display: none;">Please choose an order</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-control d-flex justify-content-center align-items-center submit-btn">
+                <span class="loader" style="display: none !important"></span>    
+                <span class="submit-txt">Submit Order</span>
+            </button>
+
+            <p class="success mt-2"style="display: none;">Thank you! We will contact you soon</p>
+            <p class="errorMsg mt-2"style="display: none;">An error occurred, please try again</p>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $('form.mainForm_form').on('submit', function(e) {
+            e.preventDefault();
+            
+            var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var order_name = $('#order_name').val();
+
+            $('.error').hide();
+            $('input, select').removeClass('invalid');
+            $('.success, .errorMsg').hide();
+
+            var isValid = true;
+            
+            if (name.trim() === '') {
+                $('#name').addClass('invalid');
+                $('#name').next('.errorMessage').fadeIn();
+                isValid = false;
+            }
+
+            if (email.trim() === '') {
+                $('#email').addClass('invalid');
+                $('#email').next('.errorMessage').fadeIn();
+                isValid = false;
+            } else if (!reg.test(email)) {
+                $('#email').addClass('invalid');
+                $('#email').next('.errorMessage').fadeIn();
+                isValid = false;
+            }
+            
+            if (phone.trim() === '') {
+                $('#phone').addClass('invalid');
+                $('#phone').next('.errorMessage').fadeIn();
+                isValid = false;
+            } else if (phone.trim().length < 11) {
+                $('#phone').addClass('invalid');
+                $('#phone').next('.errorMessage').fadeIn();
+                isValid = false;
+            }
+            
+            if (order_name.trim() === '') {
+                $('#order_name').addClass('invalid');
+                $('#order_name').next('.errorMessage').fadeIn();
+                isValid = false;
+            }
+
+            if (!isValid) return false;
+
+            $('.loader').show();
+            $('.submit-txt').hide();
+            $('.submit-btn').prop('disabled', true);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.loader').hide();
+                    $('.submit-txt').show();
+                    $('.submit-btn').prop('disabled', false);
+
+                    if (response.status === 'success') {
+                        $('.success').text(response.message).fadeIn();
+                        $('#mainForm_form')[0].reset();
+                    } else {
+                        $('.errorMsg').text(response.message || 'An error occurred').fadeIn();
+                    }
+                },
+                error: function(xhr) {
+                    $('.loader').hide();
+                    $('.submit-txt').show();
+                    $('.submit-btn').prop('disabled', false);
+                    $('.errorMsg').text('An error occurred, please try again').fadeIn();
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}FAQs | Sweet Shop{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Frequently Asked Questions</h2>
+            <p class="text-muted">Here are some answers to common questions about our shop and services.</p>
+        </div>
+
+        <div class="accordion accordion-flush" id="faqAccordion">
+            <!-- Question 1 -->
+            <div class="accordion-item mb-3 border rounded shadow-sm">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        🚚 Do you offer home delivery?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        Yes, we deliver to most areas. Delivery charges apply depending on the location.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="accordion-item mb-3 border rounded shadow-sm">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        🌾 Do you have gluten-free options?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        We offer limited gluten-free products. Please contact us for availability.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 (Example extra question) -->
+            <div class="accordion-item mb-3 border rounded shadow-sm">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        🎂 Can I order a custom cake online?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        Yes! Just fill out our contact form and include your design details. We'll get back to you quickly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
